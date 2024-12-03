@@ -127,3 +127,10 @@ Certainly, here are the improved and corrected steps for your API endpoints:
          }
      }
      ```
+
+   - **Division trabajo**
+    - Products: Jorge
+    - Favoritos: Jaiber
+    - Auth: Isaac
+    - Categorias: Adrian
+    - Documentacion y entregable: Camilo
