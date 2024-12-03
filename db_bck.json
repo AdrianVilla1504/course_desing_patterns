@@ -1,0 +1,155 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "T-Shirt",
+            "price": 20.99,
+            "category": "men"
+        },
+        {
+            "id": 2,
+            "name": "Dress",
+            "price": 45.99,
+            "category": "women"
+        },
+        {
+            "id": 3,
+            "name": "Pants",
+            "price": 35.5,
+            "category": "men"
+        },
+        {
+            "id": 4,
+            "name": "Blouse",
+            "price": 29.99,
+            "category": "women"
+        },
+        {
+            "id": 5,
+            "name": "Socks",
+            "price": 7.99,
+            "category": "kids"
+        },
+        {
+            "id": 6,
+            "name": "Jacket",
+            "price": 59.99,
+            "category": "men"
+        },
+        {
+            "id": 7,
+            "name": "Skirt",
+            "price": 24.99,
+            "category": "women"
+        },
+        {
+            "id": 8,
+            "name": "Shorts",
+            "price": 19.99,
+            "category": "men"
+        },
+        {
+            "id": 9,
+            "name": "Sweater",
+            "price": 39.99,
+            "category": "women"
+        },
+        {
+            "id": 10,
+            "name": "Hat",
+            "price": 9.99,
+            "category": "accessories"
+        },
+        {
+            "id": 11,
+            "name": "Jeans",
+            "price": 29.99,
+            "category": "men"
+        },
+        {
+            "id": 12,
+            "name": "Shoes",
+            "price": 54.99,
+            "category": "women"
+        },
+        {
+            "id": 13,
+            "name": "Tie",
+            "price": 12.99,
+            "category": "men"
+        },
+        {
+            "id": 14,
+            "name": "Earrings",
+            "price": 8.99,
+            "category": "women"
+        },
+        {
+            "id": 15,
+            "name": "Backpack",
+            "price": 29.99,
+            "category": "kids"
+        },
+        {
+            "id": 16,
+            "name": "Gloves",
+            "price": 6.99,
+            "category": "accessories"
+        },
+        {
+            "id": 17,
+            "name": "Hoodie",
+            "price": 37.99,
+            "category": "men"
+        },
+        {
+            "id": 18,
+            "name": "Sunglasses",
+            "price": 14.99,
+            "category": "women"
+        },
+        {
+            "id": 19,
+            "name": "Sweatpants",
+            "price": 25.99,
+            "category": "men"
+        },
+        {
+            "id": 20,
+            "name": "Scarf",
+            "price": 11.99,
+            "category": "women"
+        },
+        {
+            "id": 21,
+            "name": "super shirt",
+            "category": "kids",
+            "price": 14.9
+        },
+        {
+            "id": 21,
+            "name": "super shirt",
+            "category": "kids",
+            "price": 14.9
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "men"
+        },
+        {
+            "id": 2,
+            "name": "women"
+        },
+        {
+            "id": 3,
+            "name": "kids"
+        },
+        {
+            "id": 4,
+            "name": "girls"
+        }
+    ],
+    "favorites": []
+}
