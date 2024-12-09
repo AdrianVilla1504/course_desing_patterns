@@ -6,7 +6,7 @@ def is_valid_token(token):
     return token == 'abcd1234'
 
 # Clase Authenticator que se encarga de la autenticación.
-# Aplica el patrón de diseño **Single Responsibility Principle (SRP)**,
+# Aplica el **Principio de Responsabilidad Única (SRP)**,
 # ya que esta clase tiene la única responsabilidad de manejar la autenticación.
 class Authenticator:
     @staticmethod
@@ -17,12 +17,12 @@ class Authenticator:
         # Verifica si el token no está presente.
         if not token:
             # Retorna un mensaje de error y un código de estado 401 (no autorizado).
-            return { 'message': 'Unauthorized access token not found'}, 401
+            return {'message': 'Token de acceso no autorizado no encontrado'}, 401
         
         # Verifica si el token es válido.
         if not is_valid_token(token):
             # Retorna un mensaje de error y un código de estado 401 (no autorizado).
-            return { 'message': 'Unauthorized invalid token'}, 401
+            return {'message': 'Token no autorizado inválido'}, 401
         
         # Si el token es válido, retorna None, indicando que la autenticación fue exitosa.
         return None

@@ -41,6 +41,7 @@ class CategoryManager:
         self.db.remove_category(name)
         return {'message': 'Category removed successfully'}, 200
 
+
 # Clase que maneja las solicitudes HTTP relacionadas con las categorías.
 # Aplica el patrón de diseño **Facade Pattern**,
 # ya que simplifica la interacción con la lógica de negocio a través de CategoryManager.
