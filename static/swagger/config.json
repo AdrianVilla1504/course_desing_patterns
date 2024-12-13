@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "description": "API para gestionar productos y categorías.",
+      "version": "1.0.0",
+      "title": "Product and Category API"
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "schemes": [
+      "http"
+  ],
+  "paths": {
+      "/categories": {
+          "get": {
+              "summary": "Obtener todas las categorías",
+              "responses": {
+                  "200": {
+                      "description": "Lista de categorías",
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "$ref": "#/definitions/Category"
+                          }
+                      }
+                  }
+              }
+          },
+          "post": {
+              "summary": "Agregar una nueva categoría",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "category",
+                      "description": "Categoría a agregar",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Category"
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "Categoría agregada exitosamente"
+                  },
+                  "400": {
+                      "description": "Categoría ya existe"
+                  }
+              }
+          }
+      },
+      "/categories/{name}": {
+          "delete": {
+              "summary": "Eliminar una categoría",
+              "parameters": [
+                  {
+                      "name": "name",
+                      "in": "path",
+                      "required": true,
+                      "type": "string"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Categoría eliminada exitosamente"
+                  },
+                  "404": {
+                      "description": "Categoría no encontrada"
+                  }
+              }
+          }
+      },
+      "/products": {
+          "get": {
+              "summary": "Obtener todos los productos",
+              "responses": {
+                  "200": {
+                      "description": "Lista de productos",
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "$ref": "#/definitions/Product"
+                          }
+                      }
+                  }
+              }
+          },
+          "post": {
+              "summary": "Agregar un nuevo producto",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "product",
+                      "description": "Producto a agregar",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Product"
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "Producto agregado exitosamente"
+                  },
+                  "400": {
+                      "description": "Error al agregar el producto"
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {
+      "Category": {
+          "type": "object",
+          "properties": {
+              "id": {
+                  "type": "integer"
+              },
+              "name": {
+                  "type": "string"
+              }
+          }
+      },
+      "Product": {
+          "type": "object",
+          "properties": {
+              "id": {
+                  "type": "integer"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "price": {
+                  "type": "number",
+                  "format": "float"
+              },
+              "category": {
+                  "type": "string"
+              }
+          }
+      }
+  }
+}
