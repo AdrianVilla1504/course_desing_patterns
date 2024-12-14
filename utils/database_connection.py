@@ -72,8 +72,46 @@ class DatabaseConnection:
         else:
             print("Error: something went wrong adding the favorite product")
 
+    def get_items(self, key):
+        """
+        Obtiene una lista de elementos almacenados bajo una clave específica en el archivo JSON.
+        """
+        if self.data:
+            return self.data.get(key, [])
+        else:
+            print("Error: Database not connected.")
+            return []
 
+    def add_item(self, key, new_item):
+        """
+        Agrega un nuevo elemento bajo una clave específica en el archivo JSON.
+        """
+        if self.data is not None:
+            items = self.data.get(key, [])
+            items.append(new_item)
+            self.data[key] = items
+            self._save_data()
+        else:
+            print("Error: Database not connected.")
 
+    def remove_item(self, key, condition):
+        """
+        Elimina elementos bajo una clave específica que cumplan con una condición.
+        """
+        if self.data is not None:
+            items = self.data.get(key, [])
+            updated_items = [item for item in items if not condition(item)]
+            self.data[key] = updated_items
+            self._save_data()
+        else:
+            print("Error: Database not connected.")
 
-            
-
+    def _save_data(self):
+        """
+        Guarda los cambios realizados en la base de datos JSON.
+        """
+        try:
+            with open(self.json_file_path, 'w') as json_file:
+                json.dump(self.data, json_file, indent=4)
+        except Exception as e:
+            print(f"Error saving data to JSON file: {e}")

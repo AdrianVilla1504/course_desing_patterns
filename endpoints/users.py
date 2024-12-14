@@ -78,7 +78,7 @@ class UserManagementResource(Resource):
             return {'message': 'User already authenticated'}, 400
 
         # Agrega el nuevo usuario autenticado
-        self.db._add_item('authenticated_users', new_user)
+        self.db.add_item('authenticated_users', new_user)
         return {'message': 'User authenticated successfully', 'user': new_user}, 201
 
     def delete(self):
