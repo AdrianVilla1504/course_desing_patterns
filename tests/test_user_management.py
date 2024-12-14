@@ -24,7 +24,7 @@ class TestUserManagementResource(unittest.TestCase):
         # Mock para DatabaseConnection
         self.mock_db = MagicMock()
         self.mock_db.get_items.return_value = []
-        self.mock_db._add_item = MagicMock()
+        self.mock_db.add_item = MagicMock()
         self.mock_db._save_data = MagicMock()
 
         # Registrar el recurso usando la subclase con mock
@@ -62,7 +62,7 @@ class TestUserManagementResource(unittest.TestCase):
             'message': 'User authenticated successfully',
             'user': {'username': "charlie", "role": "editor"}
         })
-        self.mock_db._add_item.assert_called_with(
+        self.mock_db.add_item.assert_called_with(
             "authenticated_users", {"username": "charlie", "role": "editor"}
         )
 
