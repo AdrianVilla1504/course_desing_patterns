@@ -1,61 +1,58 @@
 from flask_restful import Resource, reqparse
-import json
 from flask import request
 from utils.database_connection import DatabaseConnection
-
-def is_valid_token(token):
-    return token == 'abcd1234'
+from utils.authenticator import Authenticator
+from utils.filters import CategoryFilter, IDFilter
 
 class ProductsResource(Resource):
     def __init__(self):
-
         self.db = DatabaseConnection('db.json')
-        self.db.connect()
+        self.filters = {
+            'category': CategoryFilter(),
+            'id': IDFilter()
+        }
 
-        self.products = self.db.get_products()
-        self.parser = reqparse.RequestParser()
-        
     def get(self, product_id=None):
-        args = self.parser.parse_args()
-        token = request.headers.get('Authorization')
+        # Validación de autenticación
+        auth_error = Authenticator.authenticate()
+        if auth_error:
+            return auth_error
+
+        # Filtrar por categoría
         category_filter = request.args.get('category')
-
-        if not token:
-            return { 'message': 'Unauthorized acces token not found'}, 401
-
-        if not is_valid_token(token):
-            return { 'message': 'Unauthorized invalid token'}, 401
-
         if category_filter:
-            filtered_products = [p for p in self.products if p['category'].lower() == category_filter.lower()]
-            return filtered_products 
-        
+            return self.filters['category'].filter(self.db.get_products(), category=category_filter)
+
+        # Obtener producto por ID
         if product_id is not None:
-            product = next((p for p in self.products if p['id'] == product_id), None)
-            if product is not None:
+            product = self.filters['id'].filter(self.db.get_products(), product_id=product_id)
+            if product:
                 return product
-            else:
-                return {'message': 'Product not found'}, 404
-              
-        return self.products
+            return {'message': 'Product not found'}, 404
+
+        # Devolver todos los productos
+        return self.db.get_products()
 
     def post(self):
-        token = request.headers.get('Authorization')
+        # Validación de autenticación
+        auth_error = Authenticator.authenticate()
+        if auth_error:
+            return auth_error
+
+        # Parsear argumentos
         parser = reqparse.RequestParser()
         parser.add_argument('name', type=str, required=True, help='Name of the product')
         parser.add_argument('category', type=str, required=True, help='Category of the product')
         parser.add_argument('price', type=float, required=True, help='Price of the product')
-
         args = parser.parse_args()
+
+        # Crear nuevo producto
         new_product = {
-            'id': len(self.products) + 1,
+            'id': len(self.db.get_products()) + 1,
             'name': args['name'],
             'category': args['category'],
             'price': args['price']
         }
 
-        self.products.append(new_product)
         self.db.add_product(new_product)
-        return {'mensaje': 'Product added', 'product': new_product}, 201
-
-
+        return new_product, 201
